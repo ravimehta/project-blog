@@ -14,7 +14,7 @@ function Header({ theme, className, ...delegated }) {
       <Logo />
 
       <div className={styles.actions}>
-        <button className={styles.action}>
+        <a className={styles.action} href="/rss.xml" target="_blank">
           <Rss
             size="1.5rem"
             style={{
@@ -23,7 +23,7 @@ function Header({ theme, className, ...delegated }) {
             }}
           />
           <VisuallyHidden>View RSS feed</VisuallyHidden>
-        </button>
+        </a>
         {/* <button className={styles.action}>
           <Sun size="1.5rem" />
           <VisuallyHidden>

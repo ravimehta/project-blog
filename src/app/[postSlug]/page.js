@@ -6,6 +6,7 @@ import BlogHero from "@/components/BlogHero";
 import styles from "./postSlug.module.css";
 import { loadBlogPost } from "@/helpers/file-helpers";
 import CodeSnippet from "@/components/CodeSnippet";
+import { notFound } from "next/navigation";
 
 const DivisionGroupsDemo = React.lazy(() =>
   import("@/components/DivisionGroupsDemo")
@@ -16,7 +17,12 @@ const CircularColorsDemo = React.lazy(() =>
 );
 
 export async function generateMetadata({ params }) {
-  const { frontmatter } = await loadBlogPost(params.postSlug);
+  const blogPost = await loadBlogPost(params.postSlug);
+
+  if (!blogPost) {
+    notFound();
+  }
+  const { frontmatter } = blogPost;
 
   return {
     title: `${frontmatter.title}`,
@@ -25,7 +31,13 @@ export async function generateMetadata({ params }) {
 }
 
 async function BlogPost({ params }) {
-  const { frontmatter, content } = await loadBlogPost(params.postSlug);
+  const blogPost = await loadBlogPost(params.postSlug);
+
+  if (!blogPost) {
+    notFound();
+  }
+
+  const { frontmatter, content } = blogPost;
 
   return (
     <article className={styles.wrapper}>
