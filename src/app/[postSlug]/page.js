@@ -11,6 +11,10 @@ const DivisionGroupsDemo = React.lazy(() =>
   import("@/components/DivisionGroupsDemo")
 );
 
+const CircularColorsDemo = React.lazy(() =>
+  import("@/components/CircularColorsDemo")
+);
+
 export async function generateMetadata({ params }) {
   const { frontmatter } = await loadBlogPost(params.postSlug);
 
@@ -32,7 +36,11 @@ async function BlogPost({ params }) {
       <div className={styles.page}>
         <MDXRemote
           source={content}
-          components={{ pre: CodeSnippet, DivisionGroupsDemo }}
+          components={{
+            pre: CodeSnippet,
+            DivisionGroupsDemo,
+            CircularColorsDemo,
+          }}
         />
       </div>
     </article>
